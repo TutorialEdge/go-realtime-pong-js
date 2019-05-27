@@ -3,6 +3,8 @@ package router
 import (
 	"fmt"
 	"net/http"
+
+	"github.com/TutorialEdge/go-realtime-pong-js/backend/websocket"
 )
 
 type Router interface {
@@ -16,7 +18,5 @@ func (r *WSRouter) SetupRoutes() {
 		fmt.Fprintf(w, "Home Page!")
 	})
 
-	http.HandleFunc("/connect", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Connecting...")
-	})
+	http.HandleFunc("/connect/{:id}", websocket.Connect)
 }
